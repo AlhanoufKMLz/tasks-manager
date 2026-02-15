@@ -12,6 +12,7 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
+  
   private tasksSignal = signal<Task[]>([
     {
       id: 1,
@@ -33,5 +34,17 @@ export class TaskService {
 
   getTask(id: number){
     return this.tasks().find(task => task.id === id)
+  }
+
+  addTask(title: string, description: string){
+    const task: Task = {
+      id: this.tasks.length + 1,
+      title,
+      description,
+      completed: false,
+      createdAt: new Date()
+    }
+
+    this.tasksSignal.update((tasks)=> [...tasks, task]);
   }
 }

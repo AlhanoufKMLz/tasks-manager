@@ -1,1 +1,53 @@
-<p>task-form works!</p>
+<div class="form-container">
+    <h2>Add New Task</h2>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <!-- title -->
+        <div class="form-group">
+            <label for="title">Task Title</label>
+            <input
+                type="text"
+                id="title"
+                formControlName="title"
+                placeholder="Enter task title"
+            />
+            @if (taskForm.controls.title.invalid && taskForm.controls.title.touched) {
+                <div class="error">
+                    @if (taskForm.controls.title.errors?.['required']) {
+                        <small>Title is required</small>
+                    }
+                    @if (taskForm.controls.title.errors?.['minlength']) {
+                        <small>Must be at least 3 characters</small>
+                    }
+                </div>
+            } 
+        </div>
+
+        <!-- description -->
+        <div class="form-group">
+            <label  for="description">Description</label>
+            <textarea
+                id="description"
+                formControlName="description"
+                rows="4"
+                placeholder="Enter task description"
+            ></textarea>
+            @if (taskForm.controls.description.invalid && taskForm.controls.description.touched) {
+                <div class="error">
+                    @if (taskForm.controls.description.errors?.['required']) {
+                        <small>Description is required</small>
+                    }
+                    @if (taskForm.controls.description.errors?.['minlength']) {
+                        <small>Must be at least 10 characters</small>
+                    }
+                </div>
+            } 
+        </div>
+
+        <!-- buttons -->
+         <div class="button-group">
+            <button type="submit" [disabled]="taskForm.invalid">Add Task</button>
+            <button type="button" routerLink="/" class="secondary">Cancel</button>
+         </div>
+    </form>
+</div>
