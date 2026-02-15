@@ -1,0 +1,123 @@
+.task-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.add-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-btn:hover {
+    background: #218838;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filters button {
+    padding: 8px 16px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filters button.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.tasks {
+    margin-top: 20px;
+}
+
+.task-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.task-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.completed {
+    opacity: 0.6;
+    background: #f8f9fa;
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-content h3 {
+    margin: 0 0 5px 0;
+}
+
+.task-content h3 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.task-content h3 a:hover {
+    color: #007bff
+}
+
+.task-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.task-content small {
+    color: #999;
+}
+
+.completed .task-content h3 {
+    text-decoration: line-through;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}

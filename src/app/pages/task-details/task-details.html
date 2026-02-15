@@ -1,0 +1,39 @@
+<div class="task-details-container">
+    @if (task(); as currentTask){
+        <div>
+            <div class="header">
+                <h1>{{ currentTask.title }}</h1>
+                <span class="status-badge" [class.completed]="currentTask.completed">
+                    {{ currentTask.completed ? 'Completed' : 'Active' }}
+                </span>
+            </div>
+
+            <div class="task-details">
+                <div class="detail-row">
+                    <strong>Description:</strong>
+                    <p>{{ currentTask.description }}</p>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Created:</strong>
+                    <p>{{ currentTask.createdAt.toLocaleDateString() }}</p>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Status:</strong>
+                    <p>{{ currentTask.completed ? 'Completed' : 'In Progress' }}</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button routerLink="/" class="back-btn">Back to list</button>
+            </div>
+        </div>
+    } @else {
+        <div class="not-found">
+            <h2>Task Not Found</h2>
+            <p>The task you're looking for doesn't exist.</p>
+            <button routerLink="/">Go Back</button>
+        </div>
+    }
+</div>

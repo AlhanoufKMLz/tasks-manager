@@ -1,0 +1,100 @@
+task-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.status-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #ffc107;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status-badge.completed {
+    background: #28a745;
+}
+
+.task-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.detail-row {
+    margin-bottom: 15px;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-row strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.detail-row p {
+    margin: 0;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.back-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
+.not-found {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.not-found button {
+    background: #007bff;
+    color: white;
+    margin-top: 20px;
+}

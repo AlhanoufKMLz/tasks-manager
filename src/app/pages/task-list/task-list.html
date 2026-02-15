@@ -1,0 +1,11 @@
+@for (task of taskService.tasks(); track task.id) {
+    <div class="task-item">
+        <div class="task-content">
+            <h3>
+                <a [routerLink]="['/task', task.id]">{{ task.title }}</a>
+            </h3>
+            <p>{{ task.description }}</p>
+            <small>Created: {{ task.createdAt.toLocaleDateString() }}</small>
+        </div>
+    </div>
+}
