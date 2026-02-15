@@ -3,9 +3,16 @@
         <div>
             <div class="header">
                 <h1>{{ currentTask.title }}</h1>
-                <span class="status-badge" [class.completed]="currentTask.completed">
-                    {{ currentTask.completed ? 'Completed' : 'Active' }}
-                </span>
+                
+                <form [formGroup]="statusForm">
+                    <div class="onoffswitch">
+                        <input type="checkbox" formControlName="completed" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </form>
             </div>
 
             <div class="task-details">

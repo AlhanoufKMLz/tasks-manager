@@ -25,7 +25,7 @@ export class TaskService {
       id: 2,
       title: 'Build a Project',
       description: 'Create a task manager application',
-      completed: true,
+      completed: false,
       createdAt: new Date('2026-02-15'),
     }
   ]);
@@ -58,5 +58,19 @@ export class TaskService {
     this.tasksSignal.update((tasks)=> {
       return tasks.filter(task => task.id !== id)
     })
+  }
+
+  changeTaskStatus(id:number, newStatus: boolean){
+    this.tasksSignal.update((tasks) => {
+      return tasks.map(task => {
+        if(task.id === id){
+          return {
+            ...task,
+            completed: newStatus
+          };
+        }
+        return task;
+      });
+    });
   }
 }

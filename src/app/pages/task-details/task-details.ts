@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TaskService } from '../../services/task-service';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-details',
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './task-details.html',
   styleUrl: './task-details.css',
 })
@@ -12,6 +13,11 @@ export class TaskDetails {
   route = inject(ActivatedRoute);
   router = inject(Router)
   private taskService = inject(TaskService);
+  private fb = inject(FormBuilder);
+  
+  statusForm = this.fb.group({
+    completed: [false],
+  })
   taskId = signal<number | null>(null);
   task = computed(()=> {
     const id = this.taskId();
@@ -33,5 +39,23 @@ export class TaskDetails {
       this.router.navigate(["/"])
     }
   }
+  
+  ngOnInit() {
+    const id = this.taskId();
+
+    const currentTask = this.task();
+    if (currentTask) {
+      this.statusForm.patchValue({
+        completed: currentTask.completed === true
+      });
+    }
+  
+    if(id){
+      this.statusForm.get('completed')?.valueChanges.subscribe((completed) => {
+        this.taskService.changeTaskStatus(id, completed!);
+      });
+    }
+  }
+  
 
 }
