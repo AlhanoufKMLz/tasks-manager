@@ -28,4 +28,8 @@ export class TaskList {
     this.filter.set(filter);
   }
 
+  deleteTask(id: number){
+    this.taskService.deleteTask(id);
+  }
+
 }

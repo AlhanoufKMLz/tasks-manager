@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TaskService } from '../../services/task-service';
 
 @Component({
@@ -10,7 +10,8 @@ import { TaskService } from '../../services/task-service';
 })
 export class TaskDetails {
   route = inject(ActivatedRoute);
-  taskService = inject(TaskService);
+  router = inject(Router)
+  private taskService = inject(TaskService);
   taskId = signal<number | null>(null);
   task = computed(()=> {
     const id = this.taskId();
@@ -22,6 +23,14 @@ export class TaskDetails {
     const id = this.route.snapshot.paramMap.get('id');
     if(id){
       this.taskId.set(Number(id));
+    }
+  }
+
+  deleteTask(){
+    const id = this.taskId();
+    if(id){
+      this.taskService.deleteTask(id);
+      this.router.navigate(["/"])
     }
   }
 

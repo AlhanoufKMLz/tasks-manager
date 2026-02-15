@@ -21,6 +21,7 @@
                 <p>{{ task.description }}</p>
                 <small>Created: {{ task.createdAt.toLocaleDateString() }}</small>
             </div>
+            <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
         </div>
     }
 </div>

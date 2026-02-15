@@ -1,4 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { filter } from 'rxjs';
 
 export interface Task {
   id: number;
@@ -51,5 +52,11 @@ export class TaskService {
     }
 
     this.tasksSignal.update((tasks)=> [...tasks, task]);
+  }
+
+  deleteTask(id: number){
+    this.tasksSignal.update((tasks)=> {
+      return tasks.filter(task => task.id !== id)
+    })
   }
 }
