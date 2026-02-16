@@ -14,8 +14,8 @@
     }
 
     @for (task of filteredTasks(); track task.id) {
-        <div class="task-item" [routerLink]="['/task', task.id]" [ngClass]="task.completed ? 'completed' : ''">
-            <div class="task-content">
+        <div class="task-item">
+            <div class="task-content" [routerLink]="['/task', task.id]" [ngClass]="task.completed ? 'completed' : ''">
                 <h3>{{ task.title }}</h3>
                 <p>{{ task.description }}</p>
                 <small>Created: {{ task.createdAt.toLocaleDateString() }}</small>
