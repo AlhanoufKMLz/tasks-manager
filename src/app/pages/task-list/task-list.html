@@ -14,11 +14,14 @@
     }
 
     @for (task of filteredTasks(); track task.id) {
-        <div class="task-item">
-            <div class="task-content" [routerLink]="['/task', task.id]" [ngClass]="task.completed ? 'completed' : ''">
-                <h3>{{ task.title }}</h3>
+        <div class="task-item" [ngClass]="task.completed ? 'completed' : ''">
+            <div class="task-content" [routerLink]="['/task', task.id]" >
+                <div class="title">
+                    <h3>{{ task.title }}</h3>
+                    <small>{{ taskService.getDaysRemaining(task.dueDate) }}</small>
+                </div>
                 <p>{{ task.description }}</p>
-                <small>Created: {{ task.createdAt.toLocaleDateString() }}</small>
+                <small>Due Date: {{ task.dueDate.toLocaleDateString() }}</small>
             </div>
             <div class="actions">
                 <div class="status" [ngClass]="task.completed ? 'status-completed' : 'status-in-progress'">{{task.completed ? 'Completed' : 'In Progress'}}</div>

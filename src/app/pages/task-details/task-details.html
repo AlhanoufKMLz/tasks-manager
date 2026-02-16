@@ -2,7 +2,7 @@
     @if (task(); as currentTask){
         <div>
             <div class="header">
-                <h1>{{ currentTask.title }}</h1>
+                <h1>{{ currentTask.title }} <span>{{ taskService.getDaysRemaining(currentTask.dueDate) }}</span></h1>
                 
                 <form [formGroup]="statusForm">
                     <div class="onoffswitch">
@@ -24,6 +24,11 @@
                 <div class="detail-row">
                     <strong>Created:</strong>
                     <p>{{ currentTask.createdAt.toLocaleDateString() }}</p>
+                </div>
+
+                <div class="detail-row">
+                    <strong>Due Date:</strong>
+                    <p>{{ currentTask.dueDate.toLocaleDateString() }}</p>
                 </div>
 
                 <div class="detail-row">

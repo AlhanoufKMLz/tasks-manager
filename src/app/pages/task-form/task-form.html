@@ -44,6 +44,24 @@
             } 
         </div>
 
+         <!-- dueDate -->
+         <div class="form-group">
+            <label  for="due-date">Due Date</label>
+            <input
+                id="due-date"
+                formControlName="dueDate"
+                type="date"
+                [min]="today"
+            />
+            @if (taskForm.controls.dueDate.invalid && taskForm.controls.description.touched) {
+                <div class="error">
+                    @if (taskForm.controls.dueDate.errors?.['required']) {
+                        <small>Due date is required</small>
+                    }
+                </div>
+            } 
+        </div>
+
         <!-- buttons -->
          <div class="button-group">
             <button type="submit" [disabled]="taskForm.invalid">Add Task</button>

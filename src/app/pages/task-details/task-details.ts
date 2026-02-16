@@ -12,7 +12,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 export class TaskDetails {
   route = inject(ActivatedRoute);
   router = inject(Router)
-  private taskService = inject(TaskService);
+  taskService = inject(TaskService);
   private fb = inject(FormBuilder);
   
   statusForm = this.fb.group({

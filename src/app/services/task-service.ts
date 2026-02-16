@@ -7,6 +7,7 @@ export interface Task {
   description: string;
   completed: boolean;
   createdAt: Date;
+  dueDate: Date;
 }
 
 @Injectable({
@@ -20,6 +21,7 @@ export class TaskService {
       description: 'Understand components, services, and routing',
       completed: true,
       createdAt: new Date('2026-01-02'),
+      dueDate: new Date('2026-01-12')
     },
     {
       id: 2,
@@ -27,6 +29,7 @@ export class TaskService {
       description: 'Create a task manager application',
       completed: false,
       createdAt: new Date('2026-02-15'),
+      dueDate: new Date('2026-03-02')
     },
     {
       id: 3,
@@ -34,6 +37,7 @@ export class TaskService {
       description: 'Learn types, interfaces, and generics',
       completed: false,
       createdAt: new Date('2026-01-10'),
+      dueDate: new Date('2026-04-05')
     },
     {
       id: 4,
@@ -41,6 +45,7 @@ export class TaskService {
       description: 'Understand Observables and Subjects',
       completed: false,
       createdAt: new Date('2026-01-20'),
+      dueDate: new Date('2026-07-02')
     },
     {
       id: 5,
@@ -48,6 +53,7 @@ export class TaskService {
       description: 'Build REST API with Node.js',
       completed: true,
       createdAt: new Date('2026-01-25'),
+      dueDate: new Date('2026-04-15')
     },
     {
       id: 6,
@@ -55,6 +61,7 @@ export class TaskService {
       description: 'Use HTTPClient to fetch and post data',
       completed: false,
       createdAt: new Date('2026-02-01'),
+      dueDate: new Date('2026-03-12')
     },
     {
       id: 7,
@@ -62,6 +69,7 @@ export class TaskService {
       description: 'Implement login, register, and guards',
       completed: true,
       createdAt: new Date('2026-02-05'),
+      dueDate: new Date('2026-05-09')
     },
     {
       id: 8,
@@ -69,6 +77,7 @@ export class TaskService {
       description: 'Filter tasks by completed or pending',
       completed: false,
       createdAt: new Date('2026-02-08'),
+      dueDate: new Date('2026-08-23')
     },
     {
       id: 9,
@@ -76,6 +85,7 @@ export class TaskService {
       description: 'Test components and services with Jasmine',
       completed: false,
       createdAt: new Date('2026-02-12'),
+      dueDate: new Date('2026-04-06')
     },
     {
       id: 10,
@@ -83,6 +93,7 @@ export class TaskService {
       description: 'Deploy to Firebase or Netlify',
       completed: false,
       createdAt: new Date('2026-02-14'),
+      dueDate: new Date('2026-11-07')
     }
   ]);
   
@@ -99,13 +110,14 @@ export class TaskService {
     return this.tasks().find(task => task.id === id)
   }
 
-  addTask(title: string, description: string){
+  addTask(title: string, description: string, dueDate: string){
     const task: Task = {
       id: this.tasks.length + 1,
       title,
       description,
       completed: false,
-      createdAt: new Date()
+      createdAt: new Date(),
+      dueDate: new Date(dueDate)
     }
 
     this.tasksSignal.update((tasks)=> [...tasks, task]);
@@ -129,5 +141,13 @@ export class TaskService {
         return task;
       });
     });
+  }
+
+  getDaysRemaining(dueDate: Date){
+    const today = new Date();
+    const due = dueDate;
+    const diff = due.getTime() - today.getTime();
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24))
+    return days > 0 ? days+'d' : 'Expired';
   }
 }

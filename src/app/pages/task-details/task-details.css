@@ -21,6 +21,12 @@
     letter-spacing: -0.025em;
     line-height: 1.2;
   }
+
+  .header span {
+    color: hsl(215.4 16.3% 46.9%);
+    font-size: 70%;
+    font-weight: normal;
+  }
   
   .status-badge {
     padding: 6px 14px;
@@ -139,7 +145,7 @@
     background: hsl(222.2 47.4% 15%);
   }
 
- /* task status */
+  /* task status */
 
 .onoffswitch {
   position: relative; 

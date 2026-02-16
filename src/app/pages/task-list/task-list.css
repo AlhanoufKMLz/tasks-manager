@@ -129,6 +129,11 @@
   text-decoration: none;
   transition: color 0.15s ease;
 }
+
+.title {
+  display: flex;
+  gap: 10px;
+}
   
 .task-content h3:hover {
   color: hsl(221, 97%, 38%);
