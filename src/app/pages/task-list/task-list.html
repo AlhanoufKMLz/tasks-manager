@@ -2,13 +2,15 @@
 <div class="actions-par">
     <div class="filters">
         <button [class.active]="filter() === 'all'" (click)="setFilter('all')">All</button>
-        <button [class.active]="filter() === 'active'" (click)="setFilter('active')">Active</button>
+        <button [class.active]="filter() === 'active'" (click)="setFilter('active')">In Progress</button>
         <button [class.active]="filter() === 'completed'" (click)="setFilter('completed')">Completed</button>
     </div>
 
     <div class="filters">
         <button [class.active]="sort() === 'creationDay'" (click)="setSort('creationDay')">Created Date</button>
-        <button [class.active]="sort() === 'dueDate'" (click)="setSort('dueDate')">Priority</button>
+        <button [class.active]="sort() === 'dueDate'" (click)="setSort('dueDate')">Due Date</button>
+        <button [class.active]="sort() === 'priority'" (click)="setSort('priority')">Priority</button>
+
     </div>
 </div>
 
@@ -20,9 +22,9 @@
             <p>No tasks found. Add one to get started!</p>
         </div>
     }
-
+    
     @for (task of filteredTasks(); track task.id) {
-        <div class="task-item" [ngClass]="task.completed ? 'completed' : ''">
+        <div class="task-item" [class.completed] = "task.completed">
             <div class="task-content" [routerLink]="['/task', task.id]" >
                 <div class="title">
                     <h3>{{ task.title }}</h3>
@@ -32,7 +34,8 @@
                 <small>Due Date: {{ task.dueDate.toLocaleDateString() }}</small>
             </div>
             <div class="actions">
-                <div class="status" [ngClass]="task.completed ? 'status-completed' : 'status-in-progress'">{{task.completed ? 'Completed' : 'In Progress'}}</div>
+                <div class="status" [ngClass]="{'low' : 'low', 'high' : 'high', 'medium' : 'medium'}[task.priority]">{{ task.priority.toUpperCase() }}</div>
+                <div class="status" [ngClass]="task.completed ? 'completed' : 'in-progress'">{{ task.completed ? 'COMPLETED' : 'IN PROGRESS' }}</div>
                 <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
             </div>
         </div>

@@ -1,7 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { TaskService } from '../../services/task-service';
+import { Task, TaskService } from '../../services/task-service';
 import { RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
+
+export type Filter = 'all' | 'completed' | 'active';
+export type Sort = 'creationDay' | 'dueDate' | 'priority';
 
 @Component({
   selector: 'app-task-list',
@@ -11,8 +14,8 @@ import { CommonModule } from '@angular/common';
 })
 export class TaskList {
   taskService = inject(TaskService);
-  filter =  signal<'all' | 'completed' | 'active'>('all');
-  sort =  signal<'creationDay' | 'dueDate'>('creationDay');
+  filter =  signal<Filter>('all');
+  sort =  signal<Sort>('creationDay');
   filteredTasks = computed(()=> {
     switch(this.filter()) {
       case 'all':
@@ -26,11 +29,11 @@ export class TaskList {
     }
   });
 
-  setFilter(filter: 'all' | 'completed' | 'active'){
+  setFilter(filter: Filter){
     this.filter.set(filter);
   }
 
-  setSort(sort: 'creationDay' | 'dueDate'){
+  setSort(sort: Sort){
     this.sort.set(sort);
     this.sortBy();
   }
@@ -40,44 +43,58 @@ export class TaskList {
   }
 
   sortBy(){
-    if(this.sort() == 'creationDay'){
-      this.filteredTasks().sort((a, b) => { 
-        const aCreated = new Date(a.createdAt).getTime();
-        const bCreated = new Date(b.createdAt).getTime();
-  
-        // both completed
-        if (a.completed && b.completed) return aCreated - bCreated;
-  
-        // one is complete
-        if (a.completed ) return 1;
-        if (b.completed) return -1;
-  
-        // both not completed
-        return aCreated - bCreated;
-      });
-    }
+    this.filteredTasks().sort((a, b) => {
 
-    if (this.sort() === 'dueDate') {
-      this.filteredTasks().sort((a, b) => {
-        const today = new Date().getTime();
+      // completed always last
+      if (a.completed && !b.completed) return 1;
+      if (!a.completed && b.completed) return -1;
   
-        const aDue = new Date(a.dueDate).getTime();
-        const bDue = new Date(b.dueDate).getTime();
+      switch (this.sort()) {
   
-        const aExpired = aDue < today;
-        const bExpired = bDue < today;
+        case 'creationDay':
+          return this.compareByCreatedAt(a, b);
   
-        // both expired
-        if (aExpired && bExpired) return aDue - bDue;
+        case 'dueDate':
+          return this.compareByDueDate(a, b);
   
-        // one is expired
-        if (aExpired) return 1;
-        if (bExpired) return -1;
+        case 'priority': {
+          const priorityDiff = this.compareByPriority(a, b);
+          if (priorityDiff !== 0) return priorityDiff;
+          return this.compareByDueDate(a, b); // tie-breaker
+        }
   
-        // both not expired
-        return aDue - bDue;
-      });
-    }
+        default:
+          return 0;
+      }
+    }); 
   }
 
+  compareByCreatedAt(a: Task, b: Task): number {
+    return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+  }
+
+  compareByDueDate (a: Task, b: Task): number {
+    const today = Date.now();
+  
+    const aDue = new Date(a.dueDate).getTime();
+    const bDue = new Date(b.dueDate).getTime();
+  
+    const aExpired = aDue < today;
+    const bExpired = bDue < today;
+  
+    //one is expired
+    if (aExpired && !bExpired) return 1;
+    if (!aExpired && bExpired) return -1;
+  
+    //both not expired
+    return aDue - bDue;
+  }
+
+  compareByPriority(a: Task, b: Task): number {
+    return this.getPriorityValue(a.priority) - this.getPriorityValue(b.priority);
+  }
+
+  getPriorityValue(priority: 'high' | 'medium' | 'low'): number {
+    return priority === 'high' ? 1 : priority === 'medium' ? 2 : 3;
+  }
 }

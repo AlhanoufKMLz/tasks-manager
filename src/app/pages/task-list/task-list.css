@@ -106,7 +106,6 @@
 .task-item:hover {
   border-color: hsl(217.2 32.6% 17.5%);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-  cursor: pointer;
 }
   
 .task-item.completed {
@@ -121,6 +120,10 @@
   
 .task-content {
   flex: 1;
+}
+
+.task-content:hover {
+  cursor: pointer;
 }
   
 .task-content h3 {
@@ -155,6 +158,12 @@
   color: hsl(220 8.9% 46.1%);
   font-size: 13px;
 }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
   
 .delete-btn {
   background: transparent;
@@ -174,15 +183,34 @@
 }
 
 .status {
-  padding-bottom: 10px;
   font-size: 15px;
   font-weight: bold;
+  color: hsl(0 0% 100%);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  width:fit-content;
+  transition: all 0.15s ease;
+  text-align: center;
 }
 
-.status-completed {
-  color: #148735;
+.completed {
+  background: #148735;
 }
   
-.status-in-progress {
-  color: #F7B500;
+.in-progress {
+  background: #F7B500;
+}
+
+.low {
+  background: #148735;
+}
+
+.medium {
+  background: #F7B500;
+}
+
+.high {
+  background: hsl(0 84.2% 60.2%);
 }
