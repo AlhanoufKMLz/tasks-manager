@@ -1,0 +1,92 @@
+[
+    {
+      "id": 1,
+      "title": "Learn Angular Basics",
+      "description": "Understand components, services, and routing",
+      "completed": true,
+      "createdAt": "2026-01-02",
+      "dueDate": "2026-01-12",
+      "priority": "high"
+    },
+    {
+      "id": 2,
+      "title": "Build a Project",
+      "description": "Create a task manager application",
+      "completed": false,
+      "createdAt": "2026-02-15",
+      "dueDate": "2026-03-02",
+      "priority": "medium"
+    },
+    {
+      "id": 3,
+      "title": "Study TypeScript",
+      "description": "Learn types, interfaces, and generics",
+      "completed": false,
+      "createdAt": "2026-01-10",
+      "dueDate": "2026-04-05",
+      "priority": "high"
+    },
+    {
+      "id": 4,
+      "title": "Learn RxJS",
+      "description": "Understand Observables and Subjects",
+      "completed": false,
+      "createdAt": "2026-01-20",
+      "dueDate": "2026-07-02",
+      "priority": "low"
+    },
+    {
+      "id": 5,
+      "title": "Set Up Backend",
+      "description": "Build REST API with Node.js",
+      "completed": true,
+      "createdAt": "2026-01-25",
+      "dueDate": "2026-04-15",
+      "priority": "low"
+    },
+    {
+      "id": 6,
+      "title": "Connect Frontend to Backend",
+      "description": "Use HTTPClient to fetch and post data",
+      "completed": false,
+      "createdAt": "2026-02-01",
+      "dueDate": "2026-03-12",
+      "priority": "medium"
+    },
+    {
+      "id": 7,
+      "title": "Add Authentication",
+      "description": "Implement login, register, and guards",
+      "completed": true,
+      "createdAt": "2026-02-05",
+      "dueDate": "2026-05-09",
+      "priority": "high"
+    },
+    {
+      "id": 8,
+      "title": "Implement Task Filters",
+      "description": "Filter tasks by completed or pending",
+      "completed": false,
+      "createdAt": "2026-02-08",
+      "dueDate": "2026-08-23",
+      "priority": "high"
+    },
+    {
+      "id": 9,
+      "title": "Write Unit Tests",
+      "description": "Test components and services with Jasmine",
+      "completed": false,
+      "createdAt": "2026-02-12",
+      "dueDate": "2026-04-06",
+      "priority": "medium"
+    },
+    {
+      "id": 10,
+      "title": "Deploy Application",
+      "description": "Deploy to Firebase or Netlify",
+      "completed": false,
+      "createdAt": "2026-02-14",
+      "dueDate": "2026-11-07",
+      "priority": "low"
+    }
+  ]

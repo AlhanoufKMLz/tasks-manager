@@ -1,5 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { filter } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { computed, inject, Injectable, signal } from '@angular/core';
 
 export interface Task {
   id: number;
@@ -15,114 +15,53 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  private tasksSignal = signal<Task[]>([
-    {
-      id: 1,
-      title: 'Learn Angular Basics',
-      description: 'Understand components, services, and routing',
-      completed: true,
-      createdAt: new Date('2026-01-02'),
-      dueDate: new Date('2026-01-12'),
-      priority: 'high'
-    },
-    {
-      id: 2,
-      title: 'Build a Project',
-      description: 'Create a task manager application',
-      completed: false,
-      createdAt: new Date('2026-02-15'),
-      dueDate: new Date('2026-03-02'),
-      priority: 'medium'
-    },
-    {
-      id: 3,
-      title: 'Study TypeScript',
-      description: 'Learn types, interfaces, and generics',
-      completed: false,
-      createdAt: new Date('2026-01-10'),
-      dueDate: new Date('2026-04-05'),
-      priority: 'high'
-    },
-    {
-      id: 4,
-      title: 'Learn RxJS',
-      description: 'Understand Observables and Subjects',
-      completed: false,
-      createdAt: new Date('2026-01-20'),
-      dueDate: new Date('2026-07-02'),
-      priority: 'low'
-    },
-    {
-      id: 5,
-      title: 'Set Up Backend',
-      description: 'Build REST API with Node.js',
-      completed: true,
-      createdAt: new Date('2026-01-25'),
-      dueDate: new Date('2026-04-15'),
-      priority: 'low'
-    },
-    {
-      id: 6,
-      title: 'Connect Frontend to Backend',
-      description: 'Use HTTPClient to fetch and post data',
-      completed: false,
-      createdAt: new Date('2026-02-01'),
-      dueDate: new Date('2026-03-12'),
-      priority: 'medium'
-    },
-    {
-      id: 7,
-      title: 'Add Authentication',
-      description: 'Implement login, register, and guards',
-      completed: true,
-      createdAt: new Date('2026-02-05'),
-      dueDate: new Date('2026-05-09'),
-      priority: 'high'
-    },
-    {
-      id: 8,
-      title: 'Implement Task Filters',
-      description: 'Filter tasks by completed or pending',
-      completed: false,
-      createdAt: new Date('2026-02-08'),
-      dueDate: new Date('2026-08-23'),
-      priority: 'high'
-    },
-    {
-      id: 9,
-      title: 'Write Unit Tests',
-      description: 'Test components and services with Jasmine',
-      completed: false,
-      createdAt: new Date('2026-02-12'),
-      dueDate: new Date('2026-04-06'),
-      priority: 'medium'
-    },
-    {
-      id: 10,
-      title: 'Deploy Application',
-      description: 'Deploy to Firebase or Netlify',
-      completed: false,
-      createdAt: new Date('2026-02-14'),
-      dueDate: new Date('2026-11-07'),
-      priority: 'low'
-    }
-  ]);
-  
+  private http = inject(HttpClient);
+
+  private storageKey = 'tasks';
+  private tasksSignal = signal<Task[]>([]);
   tasks = this.tasksSignal.asReadonly();
 
   completedTasks = computed(()=> {
     return this.tasksSignal().filter(task =>  task.completed)
   });
-  activeTasks = computed(()=> {
+  inProgressTasks = computed(()=> {
     return this.tasksSignal().filter(task =>  !task.completed)
   });
 
+  // load tasks from json and save to storage
+  loadTasks() {
+    const savedTasks = localStorage.getItem(this.storageKey);
+  
+    if (savedTasks) {
+      this.tasksSignal.set(this.parseTasks(JSON.parse(savedTasks)));
+    } else {
+      this.http.get<Task[]>('assets/tasks.json').subscribe(tasks => {
+        const parsed = this.parseTasks(tasks);
+        this.tasksSignal.set(parsed);
+        this.saveToStorage(parsed);
+      });
+    }
+  }
+
+  private parseTasks(tasks: any[]): Task[] {
+    return tasks.map(task => ({
+      ...task,
+      createdAt: new Date(task.createdAt),
+      dueDate: new Date(task.dueDate),
+    }));
+  }
+
+  private saveToStorage(tasks: Task[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(tasks));
+  }
+
+  // 
   getTask(id: number){
     return this.tasks().find(task => task.id === id)
   }
 
   addTask(title: string, description: string, dueDate: string){
-    const task: Task = {
+    const newTask: Task = {
       id: this.tasks.length + 1,
       title,
       description,
@@ -132,13 +71,15 @@ export class TaskService {
       priority: 'medium'
     }
 
-    this.tasksSignal.update((tasks)=> [...tasks, task]);
+    this.tasksSignal.update((tasks)=> [...tasks, newTask]);
+    this.saveToStorage([...this.tasks(), newTask]);
   }
 
   deleteTask(id: number){
     this.tasksSignal.update((tasks)=> {
       return tasks.filter(task => task.id !== id)
     })
+    this.saveToStorage(this.tasks().filter(task => task.id !== id));
   }
 
   changeTaskStatus(id:number, newStatus: boolean){

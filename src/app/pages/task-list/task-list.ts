@@ -23,7 +23,7 @@ export class TaskList {
       case 'completed':
         return this.taskService.completedTasks();
       case 'active':
-        return this.taskService.activeTasks();
+        return this.taskService.inProgressTasks();
       default:
         return this.taskService.tasks();
     }
