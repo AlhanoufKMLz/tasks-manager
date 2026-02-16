@@ -35,7 +35,12 @@
   background: hsl(222.2 47.4% 15%);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
-  
+
+.actions-par{
+  display: flex;
+  justify-content: space-between;
+}  
+
 .filters {
   display: inline-flex;
   gap: 4px;
@@ -44,7 +49,7 @@
   padding: 4px;
   border-radius: 8px;
 }
-  
+
 .filters button {
   padding: 8px 16px;
   border: none;
@@ -66,7 +71,7 @@
   color: hsl(222.2 84% 4.9%);
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
 }
-  
+ 
 .empty {
   text-align: center;
   padding: 80px 20px;

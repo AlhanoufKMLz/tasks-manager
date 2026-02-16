@@ -1,9 +1,17 @@
 <!-- filter -->
-<div class="filters">
-    <button [class.active]="filter() === 'all'" (click)="setFilter('all')">All</button>
-    <button [class.active]="filter() === 'active'" (click)="setFilter('active')">Active</button>
-    <button [class.active]="filter() === 'completed'" (click)="setFilter('completed')">Completed</button>
+<div class="actions-par">
+    <div class="filters">
+        <button [class.active]="filter() === 'all'" (click)="setFilter('all')">All</button>
+        <button [class.active]="filter() === 'active'" (click)="setFilter('active')">Active</button>
+        <button [class.active]="filter() === 'completed'" (click)="setFilter('completed')">Completed</button>
+    </div>
+
+    <div class="filters">
+        <button [class.active]="sort() === 'creationDay'" (click)="setSort('creationDay')">Created Date</button>
+        <button [class.active]="sort() === 'dueDate'" (click)="setSort('dueDate')">Priority</button>
+    </div>
 </div>
+
 
 <!-- list -->
 <div class="tasks">
