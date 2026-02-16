@@ -27,8 +27,65 @@ export class TaskService {
       description: 'Create a task manager application',
       completed: false,
       createdAt: new Date('2026-02-15'),
+    },
+    {
+      id: 3,
+      title: 'Study TypeScript',
+      description: 'Learn types, interfaces, and generics',
+      completed: false,
+      createdAt: new Date('2026-01-10'),
+    },
+    {
+      id: 4,
+      title: 'Learn RxJS',
+      description: 'Understand Observables and Subjects',
+      completed: false,
+      createdAt: new Date('2026-01-20'),
+    },
+    {
+      id: 5,
+      title: 'Set Up Backend',
+      description: 'Build REST API with Node.js',
+      completed: true,
+      createdAt: new Date('2026-01-25'),
+    },
+    {
+      id: 6,
+      title: 'Connect Frontend to Backend',
+      description: 'Use HTTPClient to fetch and post data',
+      completed: false,
+      createdAt: new Date('2026-02-01'),
+    },
+    {
+      id: 7,
+      title: 'Add Authentication',
+      description: 'Implement login, register, and guards',
+      completed: true,
+      createdAt: new Date('2026-02-05'),
+    },
+    {
+      id: 8,
+      title: 'Implement Task Filters',
+      description: 'Filter tasks by completed or pending',
+      completed: false,
+      createdAt: new Date('2026-02-08'),
+    },
+    {
+      id: 9,
+      title: 'Write Unit Tests',
+      description: 'Test components and services with Jasmine',
+      completed: false,
+      createdAt: new Date('2026-02-12'),
+    },
+    {
+      id: 10,
+      title: 'Deploy Application',
+      description: 'Deploy to Firebase or Netlify',
+      completed: false,
+      createdAt: new Date('2026-02-14'),
     }
   ]);
+  
   tasks = this.tasksSignal.asReadonly();
 
   completedTasks = computed(()=> {

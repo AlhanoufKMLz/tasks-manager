@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TaskService } from '../../services/task-service';
 import { RouterLink } from "@angular/router";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-list',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './task-list.html',
   styleUrl: './task-list.css',
 })
