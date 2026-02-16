@@ -18,11 +18,13 @@
   
   .form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
   
   .form-group label {
     display: block;
-    margin-bottom: 8px;
     font-weight: 500;
     font-size: 14px;
     color: hsl(222.2 84% 4.9%);
@@ -113,3 +115,69 @@
   button.secondary:hover {
     background: hsl(210 40% 96.1%);
   }
+
+  .priority-group {
+    display: inline-flex;
+    gap: 4px;
+    background: hsl(210 40% 96.1%);
+    padding: 4px;
+    border-radius: 8px;
+    width: max-content;
+  }
+  
+  .priority {
+    cursor: pointer;
+  }
+  
+  .priority input[type="radio"] {
+    display: none;
+  }
+  
+  .priority span {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: transparent;
+    color: hsl(220 8.9% 46.1%);
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .priority:hover span {
+    color: hsl(222.2 84% 4.9%);
+  }
+  
+  .priority input[type="radio"]:checked + span[value="high"],
+  .priority input[type="radio"][value="high"]:checked + span {
+    background-color: hsl(0 84.2% 60.2%);
+    color: white;
+  }
+  
+  .priority input[type="radio"]:checked + span[value="high"],
+  .priority input[type="radio"][value="high"]:checked:hover + span:hover {
+    background-color: hsl(0 84.2% 60.2%);
+    color: white;
+  }
+  
+  .priority input[type="radio"][value="medium"]:checked + span {
+    background-color: #F7B500;
+    color: white;
+  }
+  
+  .priority input[type="radio"][value="low"]:checked + span {
+    background-color: #148735;
+    color: white;
+  }
+
+  .priority input[value="high"]:hover + span {
+    background-color: hsla(0, 84%, 60%, 0.334);
+  }
+
+  .priority input[value="medium"]:hover + span {
+    background-color: #f7b5005e; 
+  }
+
+  .priority input[value="low"]:hover + span {
+    background-color: #14873563; 
+  }
+  

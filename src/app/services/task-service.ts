@@ -60,7 +60,7 @@ export class TaskService {
     return this.tasks().find(task => task.id === id)
   }
 
-  addTask(title: string, description: string, dueDate: string){
+  addTask(title: string, description: string, dueDate: string, priority: 'high' | 'medium' | 'low'){
     const newTask: Task = {
       id: this.tasks.length + 1,
       title,
@@ -68,7 +68,7 @@ export class TaskService {
       completed: false,
       createdAt: new Date(),
       dueDate: new Date(dueDate),
-      priority: 'medium'
+      priority
     }
 
     this.tasksSignal.update((tasks)=> [...tasks, newTask]);

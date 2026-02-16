@@ -18,13 +18,15 @@ export class TaskForm {
     title: ["", [Validators.required, Validators.minLength(3)]],
     description: ["", [Validators.required, Validators.minLength(10)]],
     dueDate: ["", [Validators.required]],
+    priority: ['medium', Validators.required]
   })
 
   onSubmit(){
     if(this.taskForm.valid){
-      const {title, description, dueDate} = this.taskForm.value;
+      const {title, description, dueDate, priority} = this.taskForm.value;
+      const taskPriority: 'high' | 'medium' | 'low' = (priority as 'high' | 'medium' | 'low') || 'medium';
       if(title && description && dueDate){
-        this.taskService.addTask(title, description, dueDate);
+        this.taskService.addTask(title, description, dueDate, taskPriority);
         this.taskForm.reset()
         this.router.navigate(['/'])
       }
