@@ -1,183 +1,227 @@
 .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: hsl(0 0% 100%);
-    border: 1px solid hsl(214.3 31.8% 91.4%);
-    border-radius: 8px;
-    padding: 32px;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
-  }
-  
-  .form-container h2 {
-    margin: 0 0 24px 0;
-    font-size: 24px;
-    font-weight: 700;
-    color: hsl(222.2 84% 4.9%);
-    letter-spacing: -0.025em;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: 500;
-    font-size: 14px;
-    color: hsl(222.2 84% 4.9%);
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid hsl(214.3 31.8% 91.4%);
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-    color: hsl(222.2 84% 4.9%);
-    transition: all 0.15s ease;
-    background: hsl(0 0% 100%);
-    box-sizing: border-box;
-  }
-  
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: hsl(215.4 16.3% 46.9%);
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: hsl(221.2 83.2% 53.3%);
-    box-shadow: 0 0 0 3px hsl(221.2 83.2% 53.3% / 0.1);
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .error {
-    margin-top: 6px;
-  }
-  
-  .error small {
-    color: hsl(0 84.2% 60.2%);
-    font-size: 13px;
-    font-weight: 500;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.15s ease;
-    font-family: inherit;
-  }
-  
-  button[type='submit'] {
-    background: hsl(222.2 47.4% 11.2%);
-    color: hsl(210 40% 98%);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  }
-  
-  button[type='submit']:hover:not(:disabled) {
-    background: hsl(222.2 47.4% 15%);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  }
-  
-  button[type='submit']:disabled {
-    background: hsl(214.3 31.8% 91.4%);
-    color: hsl(220 8.9% 46.1%);
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  
-  button.secondary {
-    background: transparent;
-    color: hsl(222.2 84% 4.9%);
-    border: 1px solid hsl(214.3 31.8% 91.4%);
-  }
-  
-  button.secondary:hover {
-    background: hsl(210 40% 96.1%);
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), #e8834a);
+}
+
+.form-container h2 {
+  margin: 0 0 28px 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  transition: all var(--transition);
+  background: var(--bg);
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(217, 125, 85, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error {
+  margin-top: 4px;
+}
+
+.error small {
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+button {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all var(--transition);
+  font-family: inherit;
+}
+
+button[type='submit'] {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(217, 125, 85, 0.3);
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(217, 125, 85, 0.35);
+}
+
+button[type='submit']:disabled {
+  background: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border);
+}
+
+button.secondary:hover {
+  background: var(--bg);
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+/* ── Priority selector ───────────────────────────── */
+
+.priority-group {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--bg);
+  padding: 3px;
+  border-radius: 999px;
+  width: max-content;
+  border: 1.5px solid var(--border);
+}
+
+.priority {
+  cursor: pointer;
+}
+
+.priority input[type="radio"] {
+  display: none;
+}
+
+.priority span {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.priority:hover span {
+  color: var(--text);
+}
+
+.priority input[type="radio"]:checked + span[value="high"],
+.priority input[type="radio"][value="high"]:checked + span {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.priority input[type="radio"]:checked + span[value="high"],
+.priority input[type="radio"][value="high"]:checked:hover + span:hover {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.priority input[type="radio"][value="medium"]:checked + span {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.priority input[type="radio"][value="low"]:checked + span {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.priority input[value="high"]:hover + span {
+  background-color: var(--danger-bg);
+}
+
+.priority input[value="medium"]:hover + span {
+  background-color: var(--warning-bg);
+}
+
+.priority input[value="low"]:hover + span {
+  background-color: var(--success-bg);
+}
+
+/* ── Responsive ───────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .form-container {
+    padding: 24px 18px;
   }
 
   .priority-group {
-    display: inline-flex;
-    gap: 4px;
-    background: hsl(210 40% 96.1%);
-    padding: 4px;
-    border-radius: 8px;
-    width: max-content;
-  }
-  
-  .priority {
-    cursor: pointer;
-  }
-  
-  .priority input[type="radio"] {
-    display: none;
-  }
-  
-  .priority span {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 6px;
-    background-color: transparent;
-    color: hsl(220 8.9% 46.1%);
-    font-weight: 500;
-    transition: all 0.2s ease;
-  }
-  
-  .priority:hover span {
-    color: hsl(222.2 84% 4.9%);
-  }
-  
-  .priority input[type="radio"]:checked + span[value="high"],
-  .priority input[type="radio"][value="high"]:checked + span {
-    background-color: hsl(0 84.2% 60.2%);
-    color: white;
-  }
-  
-  .priority input[type="radio"]:checked + span[value="high"],
-  .priority input[type="radio"][value="high"]:checked:hover + span:hover {
-    background-color: hsl(0 84.2% 60.2%);
-    color: white;
-  }
-  
-  .priority input[type="radio"][value="medium"]:checked + span {
-    background-color: #F7B500;
-    color: white;
-  }
-  
-  .priority input[type="radio"][value="low"]:checked + span {
-    background-color: #148735;
-    color: white;
+    width: 100%;
+    justify-content: center;
   }
 
-  .priority input[value="high"]:hover + span {
-    background-color: hsla(0, 84%, 60%, 0.334);
+  .button-group {
+    flex-direction: column;
   }
 
-  .priority input[value="medium"]:hover + span {
-    background-color: #f7b5005e; 
+  .button-group button {
+    width: 100%;
+    text-align: center;
   }
-
-  .priority input[value="low"]:hover + span {
-    background-color: #14873563; 
-  }
-  
+}
